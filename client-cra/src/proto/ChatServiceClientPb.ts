@@ -1,5 +1,5 @@
 /**
- * @fileoverview gRPC-Web generated client stub for
+ * @fileoverview gRPC-Web generated client stub for 
  * @enhanceable
  * @public
  */
@@ -10,27 +10,28 @@
 // 	protoc              v4.24.3
 // source: src/proto/chat.proto
 
+
 /* eslint-disable */
 // @ts-nocheck
+
 
 import * as grpcWeb from 'grpc-web';
 
 import * as src_proto_chat_pb from '../../src/proto/chat_pb';
 
+
 export class ChatServiceClient {
   client_: grpcWeb.AbstractClientBase;
   hostname_: string;
-  credentials_: null | { [index: string]: string };
-  options_: null | { [index: string]: any };
+  credentials_: null | { [index: string]: string; };
+  options_: null | { [index: string]: any; };
 
-  constructor(
-    hostname: string,
-    credentials?: null | { [index: string]: string },
-    options?: null | { [index: string]: any }
-  ) {
+  constructor (hostname: string,
+               credentials?: null | { [index: string]: string; },
+               options?: null | { [index: string]: any; }) {
     if (!options) options = {};
     if (!credentials) credentials = {};
-    options['format'] = 'binary';
+    options['format'] = 'text';
 
     this.client_ = new grpcWeb.GrpcWebClientBase(options);
     this.hostname_ = hostname.replace(/\/+$/, '');
@@ -51,41 +52,34 @@ export class ChatServiceClient {
 
   join(
     request: src_proto_chat_pb.User,
-    metadata: grpcWeb.Metadata | null
-  ): Promise<src_proto_chat_pb.JoinResponse>;
+    metadata: grpcWeb.Metadata | null): Promise<src_proto_chat_pb.JoinResponse>;
 
   join(
     request: src_proto_chat_pb.User,
     metadata: grpcWeb.Metadata | null,
-    callback: (
-      err: grpcWeb.RpcError,
-      response: src_proto_chat_pb.JoinResponse
-    ) => void
-  ): grpcWeb.ClientReadableStream<src_proto_chat_pb.JoinResponse>;
+    callback: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.JoinResponse) => void): grpcWeb.ClientReadableStream<src_proto_chat_pb.JoinResponse>;
 
   join(
     request: src_proto_chat_pb.User,
     metadata: grpcWeb.Metadata | null,
-    callback?: (
-      err: grpcWeb.RpcError,
-      response: src_proto_chat_pb.JoinResponse
-    ) => void
-  ) {
+    callback?: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.JoinResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ + '/ChatService/join',
+        this.hostname_ +
+          '/ChatService/join',
         request,
         metadata || {},
         this.methodDescriptorjoin,
-        callback
-      );
+        callback);
     }
     return this.client_.unaryCall(
-      this.hostname_ + '/ChatService/join',
-      request,
-      metadata || {},
-      this.methodDescriptorjoin
-    );
+    this.hostname_ +
+      '/ChatService/join',
+    request,
+    metadata || {},
+    this.methodDescriptorjoin);
   }
 
   methodDescriptorsendMsg = new grpcWeb.MethodDescriptor(
@@ -101,38 +95,34 @@ export class ChatServiceClient {
 
   sendMsg(
     request: src_proto_chat_pb.ChatMessage,
-    metadata: grpcWeb.Metadata | null
-  ): Promise<src_proto_chat_pb.Empty>;
+    metadata: grpcWeb.Metadata | null): Promise<src_proto_chat_pb.Empty>;
 
   sendMsg(
     request: src_proto_chat_pb.ChatMessage,
     metadata: grpcWeb.Metadata | null,
-    callback: (err: grpcWeb.RpcError, response: src_proto_chat_pb.Empty) => void
-  ): grpcWeb.ClientReadableStream<src_proto_chat_pb.Empty>;
+    callback: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.Empty) => void): grpcWeb.ClientReadableStream<src_proto_chat_pb.Empty>;
 
   sendMsg(
     request: src_proto_chat_pb.ChatMessage,
     metadata: grpcWeb.Metadata | null,
-    callback?: (
-      err: grpcWeb.RpcError,
-      response: src_proto_chat_pb.Empty
-    ) => void
-  ) {
+    callback?: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.Empty) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ + '/ChatService/sendMsg',
+        this.hostname_ +
+          '/ChatService/sendMsg',
         request,
         metadata || {},
         this.methodDescriptorsendMsg,
-        callback
-      );
+        callback);
     }
     return this.client_.unaryCall(
-      this.hostname_ + '/ChatService/sendMsg',
-      request,
-      metadata || {},
-      this.methodDescriptorsendMsg
-    );
+    this.hostname_ +
+      '/ChatService/sendMsg',
+    request,
+    metadata || {},
+    this.methodDescriptorsendMsg);
   }
 
   methodDescriptorreceiveMsg = new grpcWeb.MethodDescriptor(
@@ -148,14 +138,13 @@ export class ChatServiceClient {
 
   receiveMsg(
     request: src_proto_chat_pb.Empty,
-    metadata?: grpcWeb.Metadata
-  ): grpcWeb.ClientReadableStream<src_proto_chat_pb.ChatMessage> {
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<src_proto_chat_pb.ChatMessage> {
     return this.client_.serverStreaming(
-      this.hostname_ + '/ChatService/receiveMsg',
+      this.hostname_ +
+        '/ChatService/receiveMsg',
       request,
       metadata || {},
-      this.methodDescriptorreceiveMsg
-    );
+      this.methodDescriptorreceiveMsg);
   }
 
   methodDescriptorgetAllUsers = new grpcWeb.MethodDescriptor(
@@ -171,40 +160,35 @@ export class ChatServiceClient {
 
   getAllUsers(
     request: src_proto_chat_pb.Empty,
-    metadata: grpcWeb.Metadata | null
-  ): Promise<src_proto_chat_pb.UserList>;
+    metadata: grpcWeb.Metadata | null): Promise<src_proto_chat_pb.UserList>;
 
   getAllUsers(
     request: src_proto_chat_pb.Empty,
     metadata: grpcWeb.Metadata | null,
-    callback: (
-      err: grpcWeb.RpcError,
-      response: src_proto_chat_pb.UserList
-    ) => void
-  ): grpcWeb.ClientReadableStream<src_proto_chat_pb.UserList>;
+    callback: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.UserList) => void): grpcWeb.ClientReadableStream<src_proto_chat_pb.UserList>;
 
   getAllUsers(
     request: src_proto_chat_pb.Empty,
     metadata: grpcWeb.Metadata | null,
-    callback?: (
-      err: grpcWeb.RpcError,
-      response: src_proto_chat_pb.UserList
-    ) => void
-  ) {
+    callback?: (err: grpcWeb.RpcError,
+               response: src_proto_chat_pb.UserList) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
-        this.hostname_ + '/ChatService/getAllUsers',
+        this.hostname_ +
+          '/ChatService/getAllUsers',
         request,
         metadata || {},
         this.methodDescriptorgetAllUsers,
-        callback
-      );
+        callback);
     }
     return this.client_.unaryCall(
-      this.hostname_ + '/ChatService/getAllUsers',
-      request,
-      metadata || {},
-      this.methodDescriptorgetAllUsers
-    );
+    this.hostname_ +
+      '/ChatService/getAllUsers',
+    request,
+    metadata || {},
+    this.methodDescriptorgetAllUsers);
   }
+
 }
+

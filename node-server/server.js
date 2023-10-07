@@ -27,6 +27,15 @@ const join = (call, callback) => {
   }
 };
 
+const sendMsg = (call, callback) => {
+  const chatObj = call.request;
+  observers.forEach((observer) => {
+    observer.call.write(chatObj);
+  });
+
+  callback(null, {});
+};
+
 const getAllUsers = (call, callback) => {
   callback(null, { users: usersInChat });
 };
@@ -35,15 +44,6 @@ const receiveMsg = (call, callback) => {
   observers.push({
     call,
   });
-  callback(null, {});
-};
-
-const sendMsg = (call, callback) => {
-  const chatObj = call.request;
-  observers.forEach((observer) => {
-    observer.call.write(chatObj);
-  });
-  callback(null, {});
 };
 
 const server = new grpc.Server();

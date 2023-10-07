@@ -1,5 +1,5 @@
-import Chat from '../../components/Chat';
-import UsersList from '../../components/UsersList';
+import Chat from './../../components/Chat';
+import UsersList from './../../components/UsersList';
 import './ChatPage.css';
 import { ChatMessage, ReceiveMsgRequest, Empty } from '../../proto/chat_pb';
 import { useEffect, useState } from 'react';
@@ -8,19 +8,18 @@ export default function ChatPage({ client }: any) {
   const [users, setUsers] = useState([]);
   const [msgList, setMsgList] = useState<any>([]);
   const username = window.localStorage.getItem('username');
-  console.log(msgList);
 
   useEffect(() => {
     const strRq = new ReceiveMsgRequest();
     strRq.setUser(username as string);
 
-    const chatStream = client.receiveMsg(strRq, {});
-
+    var chatStream = client.receiveMsg(strRq, {});
     chatStream.on('data', (response: any) => {
       const from = response.getFrom();
       const msg = response.getMsg();
       const time = response.getTime();
-      console.log('data', response);
+
+      console.log('sending friend msg:' + msg, ' from:' + from);
 
       if (from === username) {
         setMsgList((oldArray: any) => [
@@ -33,7 +32,7 @@ export default function ChatPage({ client }: any) {
     });
 
     chatStream.on('status', function (status: any) {
-      console.log('status', status.code, status.details, status.metadata);
+      console.log(status.code, status.details, status.metadata);
     });
 
     chatStream.on('end', () => {
