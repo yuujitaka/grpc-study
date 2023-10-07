@@ -13,13 +13,11 @@ export default function ChatPage({ client }: any) {
     const strRq = new ReceiveMsgRequest();
     strRq.setUser(username as string);
 
-    var chatStream = client.receiveMsg(strRq, {});
+    const chatStream = client.receiveMsg(strRq, {});
     chatStream.on('data', (response: any) => {
       const from = response.getFrom();
       const msg = response.getMsg();
       const time = response.getTime();
-
-      console.log('sending friend msg:' + msg, ' from:' + from);
 
       if (from === username) {
         setMsgList((oldArray: any) => [
