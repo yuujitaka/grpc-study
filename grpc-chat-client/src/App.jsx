@@ -1,8 +1,8 @@
 import { useState, useRef } from 'react';
 import Header from './components/Header';
 import ChatPage from './pages/ChatPage';
-import { User, JoinResponse } from './chat_pb';
-import { ChatServiceClient } from './chat_grpc_web_pb';
+import { User } from './protos/chat_pb';
+import { ChatServiceClient } from './protos/chat_grpc_web_pb';
 
 const client = new ChatServiceClient('http://localhost:8080', null, null);
 
@@ -14,6 +14,7 @@ function App() {
     const _username = inputRef.current.value;
 
     const user = new User();
+
     user.setId(Date.now());
     user.setName(_username);
 
