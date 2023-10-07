@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@protobuf-ts/grpcweb-transport": "^2.9.1",
+    "@protobuf-ts/plugin": "^2.9.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
