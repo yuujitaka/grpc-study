@@ -13,15 +13,18 @@ export default function ChatPage({ client }: IProps) {
   const [msgList, setMsgList] = useState<ChatMessage[]>([]);
   const username = window.localStorage.getItem('username');
 
-  const listenForMessages = async () => {
-    const stream = client.receiveMsg({});
-    for await (const message of stream.responses) {
-      setMsgList([...msgList, message]);
-    }
-  };
+  useEffect(() => {
+    const listenForMessages = async () => {
+      const stream = client.receiveMsg({});
+      for await (const message of stream.responses) {
+        setMsgList((prev) => [...prev, message]);
+      }
+    };
+
+    listenForMessages();
+  }, []);
 
   useEffect(() => {
-    listenForMessages();
     getAllUsers();
   }, []);
 
