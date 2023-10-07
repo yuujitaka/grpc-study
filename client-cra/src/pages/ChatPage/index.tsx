@@ -1,37 +1,39 @@
 import Chat from '../../components/Chat';
 import UsersList from '../../components/UsersList';
 import './ChatPage.css';
-import { ChatMessage, ReceiveMsgRequest, Empty } from '../../protos/chat_pb';
+import { ChatMessage, ReceiveMsgRequest, Empty } from '../../proto/chat_pb';
 import { useEffect, useState } from 'react';
 
-export default function ChatPage({ client }) {
+export default function ChatPage({ client }: any) {
   const [users, setUsers] = useState([]);
-  const [msgList, setMsgList] = useState([]);
+  const [msgList, setMsgList] = useState<any>([]);
   const username = window.localStorage.getItem('username');
+  console.log(msgList);
 
   useEffect(() => {
     const strRq = new ReceiveMsgRequest();
-    strRq.setUser(username);
+    strRq.setUser(username as string);
 
-    var chatStream = client.receiveMsg(strRq, {});
+    const chatStream = client.receiveMsg(strRq, {});
 
-    chatStream.on('data', (response) => {
+    chatStream.on('data', (response: any) => {
       const from = response.getFrom();
       const msg = response.getMsg();
       const time = response.getTime();
+      console.log('data', response);
 
       if (from === username) {
-        setMsgList((oldArray) => [
+        setMsgList((oldArray: any) => [
           ...oldArray,
           { from, msg, time, mine: true },
         ]);
       } else {
-        setMsgList((oldArray) => [...oldArray, { from, msg, time }]);
+        setMsgList((oldArray: any) => [...oldArray, { from, msg, time }]);
       }
     });
 
-    chatStream.on('status', function (status) {
-      console.log(status.code, status.details, status.metadata);
+    chatStream.on('status', function (status: any) {
+      console.log('status', status.code, status.details, status.metadata);
     });
 
     chatStream.on('end', () => {
@@ -44,27 +46,27 @@ export default function ChatPage({ client }) {
   }, []);
 
   function getAllUsers() {
-    client.getAllUsers(new Empty(), null, (err, response) => {
+    client.getAllUsers(new Empty(), null, (err: any, response: any) => {
       let usersList = response?.getUsersList() || [];
       usersList = usersList
-        .map((user) => {
+        .map((user: any) => {
           return {
             id: user.array[0],
             name: user.array[1],
           };
         })
-        .filter((u) => u.name !== username);
+        .filter((u: any) => u.name !== username);
       setUsers(usersList);
     });
   }
 
-  function sendMessage(message) {
+  function sendMessage(message: any) {
     const msg = new ChatMessage();
     msg.setMsg(message);
-    msg.setFrom(username);
+    msg.setFrom(username as string);
     msg.setTime(new Date().toLocaleString());
 
-    client.sendMsg(msg, null, (err, response) => {
+    client.sendMsg(msg, null, (err: any, response: any) => {
       console.log(response);
     });
   }

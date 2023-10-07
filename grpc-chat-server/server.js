@@ -35,6 +35,7 @@ const receiveMsg = (call, callback) => {
   observers.push({
     call,
   });
+  callback(null, {});
 };
 
 const sendMsg = (call, callback) => {
